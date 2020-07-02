@@ -36,9 +36,9 @@ const ServerRenderController = async(ctx) => {
       <div id="app">${EleString}</div>
       <script>window.__RENDER__ = 'SSR'</script>
       <script>window.__SERVERDATA__ = JSON.parse('${JSON.stringify(serverData || {})}')</script>
-      <script src="${Manifest["main.js"] ? Manifest["main.js"] : ''}"></script>
-      <script src="${Manifest["vendor.js"] ? Manifest["vendor.js"] : ''}"></script>
-      <script src="${Manifest["runtime.js"] ? Manifest["runtime.js"] : ''}"></script>
+      <script src="${Manifest["main.js"] ? Manifest["main.js"] : ''}" defer></script>
+      <script src="${Manifest["vendor.js"] ? Manifest["vendor.js"] : ''}" defer></script>
+      <script src="${Manifest["runtime.js"] ? Manifest["runtime.js"] : ''}" defer></script>
     </body>
     </html>
   `;

@@ -20,9 +20,9 @@ const ClientRenderController = async(ctx) => {
     <body>
       <div id="app"></div>
       <script>window.__RENDER__ = 'CSR'</script>
-      <script src="${Manifest["main.js"] ? Manifest["main.js"] : ''}"></script>
-      <script src="${Manifest["vendor.js"] ? Manifest["vendor.js"] : ''}"></script>
-      <script src="${Manifest["runtime.js"] ? Manifest["runtime.js"] : ''}"></script>
+      <script src="${Manifest["main.js"] ? Manifest["main.js"] : ''}" defer></script>
+      <script src="${Manifest["vendor.js"] ? Manifest["vendor.js"] : ''}" defer></script>
+      <script src="${Manifest["runtime.js"] ? Manifest["runtime.js"] : ''}" defer></script>
     </body>
     </html>
   `;
