@@ -4,7 +4,9 @@ import App from './app';
 import 'antd/dist/antd.css';
 import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.hydrate(
+const render = window.__RENDER__ === 'SSR' ? 'hydrate' : 'render';
+
+ReactDOM[render](
 <BrowserRouter>
   <App />
 </BrowserRouter>

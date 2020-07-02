@@ -6,7 +6,7 @@ import Wrapper from '../../view/template/wrapper';
 import routes from '../../view/page/router';
 import config from 'config';
 
-const RenderController = async(ctx) => {
+const ServerRenderController = async(ctx) => {
   //执行预请求
   const currentRoute = routes.find(route => matchPath(ctx.request.url, route)) || {};
   const serverData = currentRoute.component().getInitProps ? await currentRoute.component().getInitProps() : null;
@@ -34,7 +34,8 @@ const RenderController = async(ctx) => {
     </head>
     <body>
       <div id="app">${EleString}</div>
-      ${serverData ? `<script>window.__SERVERDATA__ = JSON.parse('${JSON.stringify(serverData)}')</script>` : ''}
+      <script>window.__RENDER__ = 'SSR'</script>
+      <script>window.__SERVERDATA__ = JSON.parse('${JSON.stringify(serverData || {})}')</script>
       <script src="${Manifest["main.js"] ? Manifest["main.js"] : ''}"></script>
       <script src="${Manifest["vendor.js"] ? Manifest["vendor.js"] : ''}"></script>
       <script src="${Manifest["runtime.js"] ? Manifest["runtime.js"] : ''}"></script>
@@ -43,4 +44,4 @@ const RenderController = async(ctx) => {
   `;
 }
 
-export default RenderController;
+export default ServerRenderController;

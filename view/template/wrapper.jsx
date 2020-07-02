@@ -11,7 +11,7 @@ class Wrapper extends React.Component {
   }  
 
   componentDidMount = () => {
-    if(!isServer) {
+    if(window.__RENDER__ === 'SSR') {
       if(!window.__SERVERDATA__) {
         if(this.props.children && this.props.children.type && this.props.children.type.getInitProps) {
           this.props.children.type.getInitProps().then(resp => {
@@ -26,6 +26,14 @@ class Wrapper extends React.Component {
         }, () => {
           delete window.__SERVERDATA__
         })
+      }
+    } else if(window.__RENDER__ === 'CSR') {
+      if(this.props.children && this.props.children.type && this.props.children.type.getInitProps) {
+        this.props.children.type.getInitProps().then(resp => {
+          this.setState({
+            data: resp
+          })
+        });
       }
     }
   }

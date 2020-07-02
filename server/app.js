@@ -11,7 +11,7 @@ import CSRFMiddleWare from './service/csrf';
 
 const app = new Koa();
 app.keys = ['pAn1v'];
-app.use(logger());
+// app.use(logger());
 app.use(bodyParser());
 app.use(serve(path.join(__dirname, '../dist')));
 app.use(session({

@@ -1,7 +1,9 @@
 import Router from 'koa-router';
 import routes from '../view/page/router';
+import os from 'os-utils';
 
-import RenderController from './controller/render';
+import ServerRenderController from './controller/serverRender';
+import ClientRenderController from './controller/clientRender';
 import LoginController from './controller/login';
 import IndexController from './controller/index';
 import CsrfController from './controller/csrf';
@@ -38,15 +40,28 @@ router.post(`/csrf`, (ctx) => {
 })
 
 router.get(`(${routeReg.replace(/\//g, '\\/')})`, async(ctx) => {
-  console.log(JSON.stringify(needLoginArray));
-  console.log(JSON.stringify(needLoginReg));
   if(needLoginArray.length > 0 && new RegExp(`(${needLoginReg.replace(/\//g, '\\/')})`).test(ctx.request.url)) {
     if(!ctx.session.uid) {
       ctx.redirect('/');
       return ;
     }
   }
-  await RenderController(ctx);
+  const getOSUsage = () => {
+    return new Promise((resolve) => {
+      os.cpuUsage((v) => {
+        resolve(v)
+      });
+    })
+  }
+  const cpu = await getOSUsage();
+  console.log(`CPU Usage: ${(cpu * 100).toFixed(3)}%`)
+  if(cpu < 0.7) {
+    console.log('Use SSR');
+    await ServerRenderController(ctx);
+  } else {
+    console.log('Use CSR');
+    await ClientRenderController(ctx);
+  }
 })
 
 export default router;

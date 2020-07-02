@@ -25,6 +25,7 @@
     "koa-session-redis": "^1.1.0",
     "koa-static": "^5.0.0",
     "log4js": "^6.3.0",
+    "os-utils": "0.0.14",
     "react": "^16.13.1",
     "react-css-modules": "^4.7.11",
     "react-dom": "^16.13.1",
