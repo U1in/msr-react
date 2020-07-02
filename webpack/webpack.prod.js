@@ -7,7 +7,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const webpackConfig = {
-	entry: path.join(__dirname, '../view/page/index.js'),
+	entry: ["@babel/polyfill", path.join(__dirname, '../view/page/index.js')],
 	output: {
 		path: path.resolve(__dirname, '../dist'),
 		filename: 'js/[name]-[hash:8].js'
@@ -18,7 +18,7 @@ const webpackConfig = {
     	'@': path.join(__dirname, '../', "views")
     }
 	},
-	mode:"development",
+	mode:"production",
 	//处理css modules正则
 	module:{
 		rules:[
@@ -175,7 +175,7 @@ const webpackConfig = {
 		}),
 		//打包分析
 		new BundleAnalyzerPlugin({
-			openAnalyzer: false,
+			// openAnalyzer: false,
 		}),
 		//打包文件映射
 		new ManifestPlugin(),
