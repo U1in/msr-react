@@ -11,9 +11,11 @@ class App extends React.Component {
           Routers.map(route => (
             <Route key={route.name} path={route.path} exact render={ () => {
               const Component = route.component();
+              const title = route.title;
+              document.title = title;
               return (
-                <Wrapper>
-                  <Component />
+                <Wrapper title={title}>
+                  <Component/>
                 </Wrapper>
               )
             }}/>
