@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from '../../utils/axios';
 import loadable from '@loadable/component'
-import '../../../global/csrf.global.less';
+import '../../../global/index.global.less';
 import './index.less';
 
 import { message, Button, Alert } from 'antd';
