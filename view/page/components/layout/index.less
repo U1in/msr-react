@@ -1,0 +1,46 @@
+.red {
+  color: red;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  .menu {
+    width: 200px;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .search,
+  .search:hover,
+  .search:focus,
+  .search:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-right: 1px solid #f0f0f0;
+  }
+
+  .search {
+    height: 40px;
+  }
+
+  .search-container {
+    height: 100%;
+    width: calc(100% - 200px);
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
