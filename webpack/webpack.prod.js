@@ -13,7 +13,7 @@ const webpackConfig = {
 		filename: 'js/[name]-[hash:8].js'
 	},
 	resolve: {
-    extensions: ['.jsx', '.js'],
+    extensions: ['.js'],
     alias: {
     	'@': path.join(__dirname, '../', "views")
     }
@@ -172,10 +172,6 @@ const webpackConfig = {
 		new MiniCssExtractPlugin({
 			filename: '/css/[name]-[hash:8].css',
       chunkFilename: '/css/[id]-[hash:8].css',
-		}),
-		//打包分析
-		new BundleAnalyzerPlugin({
-			// openAnalyzer: false,
 		}),
 		//打包文件映射
 		new ManifestPlugin(),

@@ -13,7 +13,7 @@ const webpackConfig = {
 		filename: 'js/[name].js'
 	},
 	resolve: {
-    extensions: ['.jsx', '.js'],
+    extensions: ['.js'],
     alias: {
     	'@': path.join(__dirname, '../', "views")
     }

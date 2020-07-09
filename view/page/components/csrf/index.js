@@ -1,12 +1,10 @@
 import React from 'react';
 import axios from '../../utils/axios';
-import loadable from '@loadable/component'
+import Layout from '../layout/index';
 import '../../../global/index.global.less';
 import './index.less';
 
 import { message, Button, Alert } from 'antd';
-
-const Layout = loadable(() => import('../layout/index'))
 
 class CSRF extends React.Component {
   constructor(props) {
@@ -16,16 +14,20 @@ class CSRF extends React.Component {
 
   static getInitProps = async () => {
     const result = await axios({
-      method: 'GET',
-      url: 'http://localhost:9123/test'
+      method: 'POST',
+      url: '/apis?API_NAME=GET_TEST'
     });
-    return result;
+    if(result.code === 0) {
+      return result.message;
+    } else {
+      return false
+    }
   }
 
   handleTestCsrf = () => {
     axios({
       method: 'POST',
-      url: 'http://localhost:9123/csrf',
+      url: '/apis?API_NAME=CSRF',
     }).then(resp => {
       if(resp.code === 0) {
         message.success(resp.message);
@@ -44,7 +46,13 @@ class CSRF extends React.Component {
     return (
       <Layout>
         <div style={{ width: '100%' }}>
-          <Alert  message={this.props._data} type="info" showIcon />
+          {
+            this.props._data
+            ?
+            <Alert  message={this.props._data} type="info" showIcon />
+            :
+            null
+          }
           <div styleName="title">CSRF</div>
           <Button style={{marginTop: '20px'}} type="primary" onClick={() => this.handleTestCsrf()}>测试CSRF</Button>
         </div>

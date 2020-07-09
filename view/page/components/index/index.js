@@ -1,11 +1,6 @@
 import React from 'react';
-import loadable from '@loadable/component'
-import axios from '../../utils/axios';
+import Layout from '../layout/index';
 import './index.less';
-
-import { Button } from 'antd';
-
-const Layout = loadable(() => import('../layout/index'))
 
 class Index extends React.Component {
   constructor(props) {

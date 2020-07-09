@@ -7,6 +7,7 @@ import ClientRenderController from './controller/clientRender';
 import LoginController from './controller/login';
 import IndexController from './controller/index';
 import CsrfController from './controller/csrf';
+import ApisController from './controller/apis';
 
 const router = Router();
 const routeNameArray = routes.map(route => route.path);
@@ -16,10 +17,6 @@ const needLoginReg = needLoginArray.map(route => route.path).join('|');
 
 router.get(`/`, (ctx) => {
   IndexController(ctx);
-})
-
-router.get(`/test`, (ctx) => {
-  ctx.body = '这是一条同构的Ajax请求结果，刷新页面也会请求，前端路由载入组件时候也会请求。';
 })
 
 router.post(`/login`, (ctx) => {
@@ -33,10 +30,6 @@ router.get(`/logout`, (ctx) => {
     message: '已登出',
     data: ''
   };
-})
-
-router.post(`/csrf`, (ctx) => {
-  CsrfController(ctx);
 })
 
 router.get(`(${routeReg.replace(/\//g, '\\/')})`, async(ctx) => {
@@ -62,6 +55,10 @@ router.get(`(${routeReg.replace(/\//g, '\\/')})`, async(ctx) => {
     console.log('Use CSR');
     await ClientRenderController(ctx);
   }
+})
+
+router.post(`/apis`, async(ctx) => {
+  await ApisController(ctx);
 })
 
 export default router;

@@ -4,7 +4,6 @@ import './index.less';
 
 import {
   UnorderedListOutlined,
-  SearchOutlined,
   KeyOutlined,
 } from '@ant-design/icons';
 
