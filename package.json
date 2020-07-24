@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start ./server/start.js -i 4",
-    "stop": "pm2 stop all && pm2 delete all",
+    "start": "pm2-runtime start ./server/start.js -i 4",
     "dev": "nodemon --watch dist --watch server ./server/start.js",
     "client": "cross-env NODE_ENV=development webpack --watch --config ./webpack/webpack.client.js",
     "server": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.server.js",
