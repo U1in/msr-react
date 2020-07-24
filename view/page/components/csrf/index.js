@@ -46,13 +46,8 @@ class CSRF extends React.Component {
     return (
       <Layout>
         <div style={{ width: '100%' }}>
-          {
-            this.props._data
-            ?
-            <Alert  message={this.props._data} type="info" showIcon />
-            :
-            null
-          }
+          {/* 避免闪烁 */}
+          <Alert message={this.props._data} type="info" showIcon />
           <div styleName="title">CSRF</div>
           <Button style={{marginTop: '20px'}} type="primary" onClick={() => this.handleTestCsrf()}>测试CSRF</Button>
         </div>

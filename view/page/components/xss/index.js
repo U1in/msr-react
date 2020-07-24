@@ -45,13 +45,8 @@ class XSS extends React.Component {
     return (
       <Layout>
         <div style={{ width: "100%" }}>
-          {
-            this.props._data
-            ?
-            <Alert  message={this.props._data} type="info" showIcon />
-            :
-            null
-          }
+          {/* 避免闪烁 */}
+          <Alert message={this.props._data} type="info" showIcon />
           <div styleName="title">XSS</div>
           <Input style={{ width: '100%'}} placeholder="请输入XSS Payload" onChange={handleInput} value={text}/>
           <div>
