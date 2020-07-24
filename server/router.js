@@ -2,11 +2,10 @@ import Router from 'koa-router';
 import routes from '../view/page/router';
 import os from 'os-utils';
 
-import ServerRenderController from './controller/serverRender';
-import ClientRenderController from './controller/clientRender';
+import ServerRenderController from './controller/render/ssr';
+import ClientRenderController from './controller/render/csr';
 import LoginController from './controller/login';
-import IndexController from './controller/index';
-import CsrfController from './controller/csrf';
+import RootController from './controller/root';
 import ApisController from './controller/apis';
 
 const router = Router();
@@ -16,7 +15,7 @@ const routeReg = routeNameArray.join('|');
 const needLoginReg = needLoginArray.map(route => route.path).join('|');
 
 router.get(`/`, (ctx) => {
-  IndexController(ctx);
+  RootController(ctx);
 })
 
 router.post(`/login`, (ctx) => {
@@ -47,8 +46,12 @@ router.get(`(${routeReg.replace(/\//g, '\\/')})`, async(ctx) => {
     })
   }
   const cpu = await getOSUsage();
-  console.log(`CPU Usage: ${(cpu * 100).toFixed(3)}%`)
-  if(cpu < 0.7) {
+  const mem = 1 - os.freememPercentage();
+  console.log(`
+    CPU Usage: ${(cpu * 100).toFixed(3)}%;
+    MEM Usage: ${(mem * 100).toFixed(3)}%;
+  `)
+  if(cpu < 0.7 && mem < 0.8) {
     console.log('Use SSR');
     await ServerRenderController(ctx);
   } else {
