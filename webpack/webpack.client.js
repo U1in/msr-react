@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webpackConfig = {
 	entry: path.join(__dirname, '../view/page/index.js'),
@@ -169,6 +170,16 @@ const webpackConfig = {
 		]
 	},
 	plugins:[
+		new HtmlWebpackPlugin({
+      title: 'msr',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        minifyCSS: true
+      },
+      filename: 'template.html',
+      template: 'index.html'
+    }),
 		//热更新忽略
 		new webpack.WatchIgnorePlugin([path.resolve(__dirname, '../dist')]),
 		new MiniCssExtractPlugin({
