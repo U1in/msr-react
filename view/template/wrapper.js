@@ -27,7 +27,7 @@ class Wrapper extends React.Component {
           delete window.__SERVERDATA__
         })
       }
-    } else if(window.__RENDER__ === 'CSR') {
+    } else {
       if(this.props.children && this.props.children.type && this.props.children.type.getInitProps) {
         this.props.children.type.getInitProps().then(resp => {
           this.setState({
